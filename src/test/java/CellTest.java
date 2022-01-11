@@ -1,17 +1,14 @@
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CellTest {
 
     @Test
     public void CellShouldDieWithoutNeighbor(){
 
-        Main main = new Main();
+        Cell cell = new Cell();
 
         int width = 8, height = 8;
         int[][] grid = {
@@ -25,7 +22,7 @@ public class CellTest {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
         };
 
-       // main.currentGeneration(grid, width, height);
+       cell.currentGeneration(grid, width, height);
     }
 //
 //    @Test
