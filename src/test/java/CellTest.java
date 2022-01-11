@@ -11,7 +11,7 @@ public class CellTest {
     @Test
     public void CellShouldDieWithoutNeighbor(){
 
-        int M = 8, N = 8;
+        int width = 8, height = 8;
         int[][] grid = {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 1, 0 },
@@ -23,7 +23,7 @@ public class CellTest {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
         };
 
-        Main.currentGeneration(grid, M, N);
+        Main.currentGeneration(grid, width, height);
     }
 //
 //    @Test

@@ -3,8 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int M = 8, N = 8;
-
+        int width = 8, height = 8;
         int[][] grid = {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 1, 1, 0, 0, 0 },
@@ -16,14 +15,14 @@ public class Main {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
         };
 
-        currentGeneration(grid, M, N);
+        currentGeneration(grid, width, height);
     }
 
-    public static void currentGeneration(int[][] grid, int M, int N) {
+    public static void currentGeneration(int[][] grid, int width, int height) {
         System.out.println("Current Generation");
 
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 if (grid[i][j] == 0)
                     System.out.print(".");
                 else
@@ -33,15 +32,15 @@ public class Main {
         }
         System.out.println();
 
-        nextGeneration(grid, M, N);
+        nextGeneration(grid, width, height);
     }
 
-    static void nextGeneration(int grid[][], int M, int N) {
+    static void nextGeneration(int grid[][], int width, int height) {
 
-        int[][] nextGrid = new int[M][N];
+        int[][] nextGrid = new int[width][height];
 
-        for (int l = 1; l < M - 1; l++) {
-            for (int m = 1; m < N - 1; m++) {
+        for (int l = 1; l < width - 1; l++) {
+            for (int m = 1; m < height - 1; m++) {
 
                 int neighbor = 0;
                 for (int i = -1; i <= 1; i++)
@@ -50,25 +49,25 @@ public class Main {
 
                 neighbor -= grid[l][m];
 
-                if ((grid[l][m] == 1) && (neighbor < 2)) {
+                if ((grid[l][m] == 1) && (neighbor < 2))
                     nextGrid[l][m] = 0;
-                }
-                else if ((grid[l][m] == 1) && (neighbor > 3)) {
+                else if ((grid[l][m] == 1) && (neighbor > 3))
                     nextGrid[l][m] = 0;
-                }
-                else if ((grid[l][m] == 0) && (neighbor == 3)) {
+                else if ((grid[l][m] == 0) && (neighbor == 3))
                     nextGrid[l][m] = 1;
-                }
-                else {
+                else
                     nextGrid[l][m] = grid[l][m];
-                }
             }
         }
 
+        printNextGeneration(width, height, nextGrid);
+    }
+
+    private static void printNextGeneration(int width, int height, int[][] nextGrid) {
         System.out.println("Next Generation");
-        for (int i = 0; i < M; i++)
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < N; j++)
+            for (int j = 0; j < height; j++)
             {
                 if (nextGrid[i][j] == 0)
                     System.out.print(".");
