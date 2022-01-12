@@ -7,9 +7,9 @@ public class Cell {
     public int nextState(int cell, int aliveNeighbors) {
 
         if (cell == LIVE & aliveNeighbors > 3 | cell == LIVE & aliveNeighbors < 2) {
-            cell = 0;
+            cell = DEAD;
         } else if (cell == DEAD & aliveNeighbors == 3) {
-            cell = 1;
+            cell = LIVE;
         }
         return cell;
     }
