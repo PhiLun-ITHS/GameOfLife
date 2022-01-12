@@ -40,24 +40,28 @@ public class CellTest {
 
         assertEquals(cell, DEAD);
     }
-//
-//    @Test
-//    public void CellShouldStayAliveWithTwoAliveNeighbors(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(2);
-//
-//        assertEquals(true, cell.isCellAlive());
-//    }
-//
-//    @Test
-//    public void CellShouldStayAliveWithThreeAliveNeighbors(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(3);
-//
-//        assertEquals(true, cell.isCellAlive());
-//    }
+
+    @Test
+    public void CellShouldStayAliveWithTwoNeighbors(){
+
+        int cell = LIVE;
+        int aliveNeighbors = 2;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, LIVE);
+    }
+
+    @Test
+    public void CellShouldStayAliveWithThreeNeighbors(){
+
+        int cell = LIVE;
+        int aliveNeighbors = 3;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, LIVE);
+    }
 //
 //    @Test
 //    public void DeadCellShouldBeAliveWithThreeAliveNeighbors(){
