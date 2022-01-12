@@ -1,8 +1,8 @@
 
 public class Cell {
 
-    public static final int LIVE = 1;
-    public static final int DEAD = 0;
+    private final int LIVE = 1;
+    private final int DEAD = 0;
 
     public int nextState(int cell, int aliveNeighbors) {
 
