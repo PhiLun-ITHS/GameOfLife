@@ -5,15 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CellTest {
 
-//    @Test
-//    public void CellShouldDieWithoutNeighbor(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(0);
-//
-//        assertEquals(false, cell.isCellAlive());
-//    }
-//
+    private final int LIVE = 1;
+    private final int DEAD = 0;
+
+    @Test
+    public void CellShouldDieWithoutNeighbor(){
+
+        int cell = LIVE;
+        int aliveNeighbors = 1;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, DEAD);
+    }
+
 //    @Test
 //    public void CellShouldDieWithOneNeighbor(){
 //
@@ -58,7 +63,7 @@ public class CellTest {
 //
 //        assertEquals(true, cell.isCellAlive());
 //    }
-//
+
 
 /*
     @Test
