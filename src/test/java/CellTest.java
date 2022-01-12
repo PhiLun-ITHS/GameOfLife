@@ -29,15 +29,17 @@ public class CellTest {
 
         assertEquals(cell, DEAD);
     }
-//
-//    @Test
-//    public void CellShouldDieWithMoreThanThreeNeighbors(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(4);
-//
-//        assertEquals(false, cell.isCellAlive());
-//    }
+
+    @Test
+    public void OverpopulatedCellDiesWithMoreThanThreeNeighbors(){
+
+        int cell = LIVE;
+        int aliveNeighbors = 7;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, DEAD);
+    }
 //
 //    @Test
 //    public void CellShouldStayAliveWithTwoAliveNeighbors(){
