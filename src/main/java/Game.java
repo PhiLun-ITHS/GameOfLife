@@ -10,17 +10,19 @@ public class Game {
     private void createBoard(){
 
         int width = 8, height = 8;
-
         Cell cell = new Cell();
-        //creates board
+
         int[][] board = new int[width][height];
-        //fills board with dead cells
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 board[i][j] = cell.DEAD;
             }
         }
-        //prints board
+        printBoard(width, height, board);
+    }
+
+    private void printBoard(int width, int height, int[][] board) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (board[i][j] == 0)
