@@ -62,15 +62,17 @@ public class CellTest {
 
         assertEquals(cell, LIVE);
     }
-//
-//    @Test
-//    public void DeadCellShouldBeAliveWithThreeAliveNeighbors(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(3);
-//
-//        assertEquals(true, cell.isCellAlive());
-//    }
+
+    @Test
+    public void DeadCellShouldBeAliveWithThreeAliveNeighbors(){
+
+        int cell = DEAD;
+        int aliveNeighbors = 3;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, LIVE);
+    }
 
 
 /*
