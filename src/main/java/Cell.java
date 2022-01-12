@@ -6,19 +6,10 @@ public class Cell {
 
     public int nextState(int cell, int aliveNeighbors) {
 
-        if (cell == LIVE) {
-            if (aliveNeighbors > 3) {
-                cell = 0;
-            } else if (aliveNeighbors < 2) {
-                cell = 0;
-            }
-            else if (aliveNeighbors == 2 | aliveNeighbors == 3) {
-                cell = 1;
-            }
-        } else if (cell == DEAD && aliveNeighbors == 3) {
-            cell = 1;
-        } else {
+        if (cell == LIVE & aliveNeighbors > 3 | cell == LIVE & aliveNeighbors < 2) {
             cell = 0;
+        } else if (cell == DEAD & aliveNeighbors == 3) {
+            cell = 1;
         }
         return cell;
     }
