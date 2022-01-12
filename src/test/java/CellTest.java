@@ -9,7 +9,18 @@ public class CellTest {
     private final int DEAD = 0;
 
     @Test
-    public void CellShouldDieWithoutNeighbor(){
+    public void CellDiesWithoutNeighbors(){
+
+        int cell = LIVE;
+        int aliveNeighbors = 0;
+
+        cell = new Cell().nextState(cell, aliveNeighbors);
+
+        assertEquals(cell, DEAD);
+    }
+
+    @Test
+    public void CellDiesWithOneNeighbor(){
 
         int cell = LIVE;
         int aliveNeighbors = 1;
@@ -18,15 +29,6 @@ public class CellTest {
 
         assertEquals(cell, DEAD);
     }
-
-//    @Test
-//    public void CellShouldDieWithOneNeighbor(){
-//
-//        Cell cell = new Cell();
-//        cell.setNeighbors(1);
-//
-//        assertEquals(false, cell.isCellAlive());
-//    }
 //
 //    @Test
 //    public void CellShouldDieWithMoreThanThreeNeighbors(){
