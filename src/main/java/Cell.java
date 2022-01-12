@@ -1,19 +1,12 @@
 
 public class Cell {
 
-    private int aliveNeighbors;
-
-    public int getAliveNeighbors() {
-        return aliveNeighbors;
-    }
-
-    public void setAliveNeighbors(int aliveNeighbors) {
-        this.aliveNeighbors = aliveNeighbors;
-    }
+    public static final int LIVE = 1;
+    public static final int DEAD = 0;
 
     public int nextState(int cell, int aliveNeighbors) {
 
-        if (cell == 1) {
+        if (cell == LIVE) {
             if (aliveNeighbors > 3) {
                 cell = 0;
             } else if (aliveNeighbors < 2) {
@@ -22,7 +15,7 @@ public class Cell {
             else if (aliveNeighbors == 2 | aliveNeighbors == 3) {
                 cell = 1;
             }
-        } else if (cell == 0 && aliveNeighbors == 3) {
+        } else if (cell == DEAD && aliveNeighbors == 3) {
             cell = 1;
         } else {
             cell = 0;
