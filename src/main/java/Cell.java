@@ -1,19 +1,21 @@
 
 public class Cell {
 
-    private boolean CellAlive;
     private int neighbors;
+    private int cell;
 
-    public boolean isCellAlive() {
+    public Cell nextGenerationCell() {
 
         if (neighbors < 2) {
-            CellAlive = false;
-        } else if (neighbors == 2 || neighbors == 3) {
-            CellAlive = true;
-        } else {
-            CellAlive = false;
+            cell = 0;
+        } else if (neighbors == 2) {
+            cell = 1;
+//        } else if (cell = 0 && neighbors == 3) {
+//
+//        } else {
+            cell = 0;
         }
-        return CellAlive;
+        return this;
     }
 
     public void setNeighbors(int neighbors) {
