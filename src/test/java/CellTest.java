@@ -73,16 +73,4 @@ public class CellTest {
 
         assertEquals(cell, LIVE);
     }
-
-
-/*
-    @Test
-    public void CellShouldDieOnEdges(){
-        Cell cell = new Cell();
-
-        cell.setCellAlive(false);
-
-        assertEquals(false, cell.isCellAlive());
-    }
- */
 }
