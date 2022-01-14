@@ -65,12 +65,3 @@ public class Cell {
         }
     }
 }
-//            if ((currentGenerationBoard[l][m] == 1) && (neighbor < 2))
-//                nextGenerationBoard[l][m] = 0;
-//            else if ((currentGenerationBoard[l][m] == 1) && (neighbor > 3))
-//                nextGenerationBoard[l][m] = 0;
-//            else if ((currentGenerationBoard[l][m] == 0) && (neighbor == 3))
-//                nextGenerationBoard[l][m] = 1;
-//            else
-//                nextGenerationBoard[l][m] = currentGenerationBoard[l][m];
-//        }
