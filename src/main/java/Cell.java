@@ -1,19 +1,26 @@
 
 public class Cell {
 
-    void currentGeneration(int[][] grid, int width, int height) {
-        System.out.println("Current Generation");
+    public static final int LIVE = 1;
+    public static final int DEAD = 0;
 
-        printCurrentGeneration(grid, width, height);
-        System.out.println();
-
-        nextGeneration(grid, width, height);
+    protected void currentGeneration(int[][] currentGenerationBoard) {
+        printCurrentGeneration(currentGenerationBoard);
+        nextGeneration(currentGenerationBoard);
     }
 
-    private void printCurrentGeneration(int[][] grid, int width, int height) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (grid[i][j] == 0)
+    private void nextGeneration(int currentGenerationBoard[][]) {
+        int[][] nextGenerationBoard = new int[Game.rows][Game.columns];
+
+        calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
+        printNextGeneration(nextGenerationBoard);
+    }
+
+    protected void printCurrentGeneration(int[][] currentGenerationBoard) {
+        System.out.println("Current Generation");
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                if (currentGenerationBoard[i][j] == 0)
                     System.out.print(".");
                 else
                     System.out.print("*");
@@ -22,50 +29,48 @@ public class Cell {
         }
     }
 
-    private void nextGeneration(int grid[][], int width, int height) {
-        int[][] nextGrid = new int[width][height];
-
-        calculateNextGeneration(grid, width, height, nextGrid);
-        printNextGeneration(width, height, nextGrid);
+    private void printNextGeneration(int[][] nextGenerationBoard) {
+        System.out.println("Next Generation");
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                if (nextGenerationBoard[i][j] == 0)
+                    System.out.print(".");
+                else
+                    System.out.print("*");
+            }
+            System.out.println();
+        }
     }
 
-    private void calculateNextGeneration(int[][] grid, int width, int height, int[][] nextGrid) {
-        for (int l = 1; l < width - 1; l++) {
-            for (int m = 1; m < height - 1; m++) {
+    public static void calculateNextGeneration(int[][] currentGenerationBoard, int[][] nextGenerationBoard) {
+        for (int l = 1; l < Game.rows - 1; l++) {
+            for (int m = 1; m < Game.columns - 1; m++) {
 
+                int cell = currentGenerationBoard[l][m];
                 int neighbor = 0;
                 for (int i = -1; i <= 1; i++)
                     for (int j = -1; j <= 1; j++)
-                        neighbor += grid[l + i][m + j];
+                        neighbor += currentGenerationBoard[l + i][m + j];
+                neighbor -= currentGenerationBoard[l][m];
 
-                neighbor -= grid[l][m];
-
-                gameRules(grid, nextGrid, l, m, neighbor);
+            if (cell == LIVE && neighbor < 2)
+                nextGenerationBoard[l][m] = DEAD;
+            else if (cell == LIVE && neighbor > 3)
+                nextGenerationBoard[l][m] = DEAD;
+            else if (cell == DEAD && neighbor == 3)
+                nextGenerationBoard[l][m] = LIVE;
+            else
+                nextGenerationBoard[l][m] = currentGenerationBoard[l][m];
             }
-        }
-    }
-
-    private void gameRules(int[][] grid, int[][] nextGrid, int l, int m, int neighbor) {
-        if ((grid[l][m] == 1) && (neighbor < 2))
-            nextGrid[l][m] = 0;
-        else if ((grid[l][m] == 1) && (neighbor > 3))
-            nextGrid[l][m] = 0;
-        else if ((grid[l][m] == 0) && (neighbor == 3))
-            nextGrid[l][m] = 1;
-        else
-            nextGrid[l][m] = grid[l][m];
-    }
-
-    private static void printNextGeneration(int width, int height, int[][] nextGrid) {
-        System.out.println("Next Generation");
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (nextGrid[i][j] == 0)
-                    System.out.print(".");
-                else
-                    System.out.print("*");
-            }
-            System.out.println();
         }
     }
 }
+//            if ((currentGenerationBoard[l][m] == 1) && (neighbor < 2))
+//                nextGenerationBoard[l][m] = 0;
+//            else if ((currentGenerationBoard[l][m] == 1) && (neighbor > 3))
+//                nextGenerationBoard[l][m] = 0;
+//            else if ((currentGenerationBoard[l][m] == 0) && (neighbor == 3))
+//                nextGenerationBoard[l][m] = 1;
+//            else
+//                nextGenerationBoard[l][m] = currentGenerationBoard[l][m];
+//        }
