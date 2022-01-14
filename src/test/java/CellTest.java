@@ -4,72 +4,103 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CellTest {
 
-    private final int LIVE = 1;
-    private final int DEAD = 0;
+    int[][] currentGenerationBoard = new int[Game.rows][Game.columns];
+    int[][] nextGenerationBoard = new int[Game.rows][Game.columns];
 
     @Test
-    public void CellDiesWithoutNeighbors(){
+    public void LiveCellShouldDieWithoutLivingNeighbors(){
 
-        int cell = LIVE;
-        int aliveNeighbors = 0;
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][4] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        assertEquals(cell, DEAD);
+        assertEquals(Cell.DEAD, nextGenerationBoard[1][4]);
     }
 
     @Test
-    public void CellDiesWithOneNeighbor(){
+    public void LiveCellShouldDieWithOneLivingNeighbor(){
 
-        int cell = LIVE;
-        int aliveNeighbors = 1;
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][4] = Cell.LIVE;
+        currentGenerationBoard[1][5] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
-
-        assertEquals(cell, DEAD);
+        assertEquals(Cell.DEAD, nextGenerationBoard[1][4]);
     }
 
     @Test
-    public void OverpopulatedCellDiesWithMoreThanThreeNeighbors(){
+    public void LiveCellShouldDieWithMoreThanThreeLivingNeighbors(){
 
-        int cell = LIVE;
-        int aliveNeighbors = 7;
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][2] = Cell.LIVE;
+        currentGenerationBoard[1][3] = Cell.LIVE;
+        currentGenerationBoard[2][2] = Cell.LIVE;
+        currentGenerationBoard[2][3] = Cell.LIVE;
+        currentGenerationBoard[2][4] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
-
-        assertEquals(cell, DEAD);
+        assertEquals(Cell.DEAD, nextGenerationBoard[1][3]);
     }
 
     @Test
-    public void CellShouldStayAliveWithTwoNeighbors(){
+    public void LiveCellShouldStayAliveWithTwoLivingNeighbors(){
 
-        int cell = LIVE;
-        int aliveNeighbors = 2;
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][3] = Cell.LIVE;
+        currentGenerationBoard[2][2] = Cell.LIVE;
+        currentGenerationBoard[2][3] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
-
-        assertEquals(cell, LIVE);
+        assertEquals(Cell.LIVE, nextGenerationBoard[1][3]);
     }
 
     @Test
-    public void CellShouldStayAliveWithThreeNeighbors(){
+    public void LiveCellShouldStayAliveWithThreeLivingNeighbors(){
 
-        int cell = LIVE;
-        int aliveNeighbors = 3;
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][3] = Cell.LIVE;
+        currentGenerationBoard[1][2] = Cell.LIVE;
+        currentGenerationBoard[2][2] = Cell.LIVE;
+        currentGenerationBoard[2][3] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
-
-        assertEquals(cell, LIVE);
+        assertEquals(Cell.LIVE, nextGenerationBoard[1][3]);
     }
 
     @Test
-    public void DeadCellShouldBeAliveWithThreeAliveNeighbors(){
+    public void DeadCellShouldComeToLifeWithThreeLivingNeighbors(){
 
-        int cell = DEAD;
-        int aliveNeighbors = 3;
+        for (int i = 0; i < Game.rows; i++) {
+            for (int j = 0; j < Game.columns; j++) {
+                currentGenerationBoard[i][j] = Cell.DEAD;
+            }
+        }
+        currentGenerationBoard[1][2] = Cell.LIVE;
+        currentGenerationBoard[1][3] = Cell.LIVE;
+        currentGenerationBoard[1][4] = Cell.LIVE;
+        Cell.calculateNextGeneration(currentGenerationBoard, nextGenerationBoard);
 
-        cell = new Cell().nextState(cell, aliveNeighbors);
-
-        assertEquals(cell, LIVE);
+        assertEquals(Cell.LIVE, nextGenerationBoard[2][3]);
     }
 }
